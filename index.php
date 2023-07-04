@@ -1,6 +1,8 @@
+
 <?php
-$result = "<div><form>
-<input type='time' value=''>
-</form></div>";
+include 'index.html';
+require_once 'frame.php';
+$frame = new Frame();
+$result = $frame->get_h();
 echo $result;
 ?>
