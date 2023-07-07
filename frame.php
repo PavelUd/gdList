@@ -1,17 +1,18 @@
 <?php
 Class Frame
 {
-    function get_h()
+    function get_header()
     {
-        $result = ' <div class="col-md-3">
-                             <select name="status" class="form-control">
-                                <option value="0" selected>один</option>
-                                <option value="1" >два</option>
-                                <option value="2" >три</option>
-                                <option value="3" >четыре</option>
-                                </select>
-                                <input type="time" class="form-control">
-                     </div>';
+        $result = ' <header class="site-header sticky-top py-3">
+  <nav class="container d-flex flex-column flex-md-row justify-content-between" style="font-size: large">
+    <div class="btn-group col-8 mx-auto" role="group" aria-label="Basic outlined example">
+      <a type="button" class="btn btn-outline-dark" href="?page=MainList"><b>Main List</b></a>
+      <a type="button" class="btn btn-outline-dark" href="?page=LegacyList"><b>Legacy List</b></a>
+      <a type="button" class="btn btn-outline-dark"><b>Extended List</b></a>
+    </div>
+    <a style="text-decoration: none; font-family: Georgia" class="btn btn-outline-dark" href="#"><b>Sign up</b></a>
+    </nav>
+</header>';
         return $result;
     }
 }

@@ -10405,4 +10405,15 @@ a.text-dark:hover, a.text-dark:focus {
 .comments_hidden {
   display: none !important;
 }
+.mini-card:hover {
+  transform: scale(1, 1.05);
+}
+.mini-card{
+  transition: transform 0.2s;
+  -webkit-font-smoothing: subpixel-antialiased;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+  box-shadow: 10px 5px 5px darkgrey;
+}
 /*# sourceMappingURL=bootstrap.css.map */
