@@ -9,6 +9,32 @@
 <body>
 <meta charset="utf-8">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script>
+    var globalbutton;
+    var globalclass;
+    function get_info(event)
+    {
+        if (globalbutton) {
+            globalbutton.setAttribute('class', globalclass)
+        }
+        var button = event.target;
+        var _class = button.getAttribute('class')
+        globalclass = _class
+        button.setAttribute('class', _class+ ' active')
+        if (button.tagName === 'BUTTON') {
+            var buttonName = button.name;
+        }
+        globalbutton = button
+        var cardTree = document.getElementById("TreeCard")
+        cardTree.childNodes.forEach(x => {
+            var name = x.getAttribute('name')
+            x.style.display = name == buttonName ? 'flex' : 'none'
+            x.style.top= name == buttonName ? '-200px ' : '0px'
+            x.setAttribute('class', 'card card-show')
 
+        })
+
+    }
+</script>
 </body>
 </html>
