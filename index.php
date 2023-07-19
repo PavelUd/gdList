@@ -1,24 +1,23 @@
 
 <?php
 include 'index.html';
+include 'bd.php';
 require_once 'frame.php';
 require_once 'main_list.php';
 require_once 'legacy_list.php';
 $frame = new Frame();
-$header = $frame->get_header();
-$result = $header;
 $page=$_REQUEST["page"];
 switch ($page)
 {
     case 'MainList':
 
         $main_list = new MainList();
-        $result = $header;
+        $result = $frame->get_header('MainList');
         $result .= $main_list->get_header();
         break;
     case  'LegacyList':
         $LegacyList = new legacy_list();
-        $result = $header;
+        $result = $frame->get_header('LegacyList');
         $result .= $LegacyList->get_page();
         break;
 

@@ -3050,6 +3050,66 @@ fieldset:disabled a.btn {
 .show > .btn-outline-warning.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5);
 }
+.btn-outline-gold {
+  color: #d39e00;
+  border-color: #d39e00;
+}
+
+.btn-outline-gold:hover {
+  color: #fff;
+  background-color: #d39e00;
+  border-color: #997404;
+}
+
+.btn-outline-gold:focus, .btn-outline-warning.focus {
+  box-shadow: 0 0 0 0.2rem #d39e00;
+}
+
+.btn-outline-gold.disabled, .btn-outline-warning:disabled {
+  color: #ffc107;
+  background-color: transparent;
+}
+.btn-outline-gold:not(:disabled):not(.disabled):active, .btn-outline-gold:not(:disabled):not(.disabled).active,
+.show > .btn-outline-gold.dropdown-toggle {
+  color: #fff;
+  background-color: #d39e00;
+  border-color: #d39e00;
+}
+
+.btn-outline-gold:not(:disabled):not(.disabled):active:focus, .btn-outline-gold:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-gold.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem #d39e00;
+}
+.btn-outline-diamond {
+  color: #0dcaf0;
+  border-color: #0dcaf0;
+}
+
+.btn-outline-diamond:hover {
+  color: #fff;
+  background-color: #0dcaf0;
+  border-color: #0dcaf0;
+}
+
+.btn-outline-diamond:focus, .btn-outline-diamond.focus {
+  box-shadow: 0 0 0 0.2rem #0dcaf0;
+}
+
+.btn-outline-diamond.disabled, .btn-outline-diamond:disabled {
+  color: #0dcaf0;
+  background-color: transparent;
+}
+.btn-outline-diamond:not(:disabled):not(.disabled):active, .btn-outline-diamond:not(:disabled):not(.disabled).active,
+.show > .btn-outline-diamond.dropdown-toggle {
+  color: #fff;
+  background-color: #0dcaf0;
+  border-color: #0dcaf0;
+}
+
+.btn-outline-diamond:not(:disabled):not(.disabled):active:focus, .btn-outline-diamond:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-diamond.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem #0dcaf0;
+}
 
 .btn-outline-danger {
   color: #dc3545;
@@ -4778,6 +4838,19 @@ input[type="button"].btn-block {
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+}
+.card-show{
+  animation: fadeIn 1s ease 0s forwards;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(0px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(200px);
+  }
 }
 
 .card > hr {
@@ -10409,11 +10482,17 @@ a.text-dark:hover, a.text-dark:focus {
   transform: scale(1, 1.05);
 }
 .mini-card{
+  display: flex;
   transition: transform 0.2s;
   -webkit-font-smoothing: subpixel-antialiased;
   transform: translateZ(0);
   backface-visibility: hidden;
   will-change: transform;
   box-shadow: 10px 5px 5px darkgrey;
+}
+.card-show
+{
+  top: 10px
+
 }
 /*# sourceMappingURL=bootstrap.css.map */
