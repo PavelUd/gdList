@@ -21,7 +21,7 @@ Class MainList
 </div>
 </a>';
         }
-        $result .= '<a href="?page=LegacyList" class="card" style="max-width: 540px; margin-left: 1.5rem; margin-top: 1.5rem; text-decoration: none; color: black " name="gold"><div class = "mini-card">
+        $result .= '<a href="?page=LegacyList" class="card" style="max-width: 540px; margin-left: 1.5rem; margin-top: 1.5rem; text-decoration: none; color: black " name="gold" ><div class = "mini-card">
           <div class="row g-0">
             <div class="col-md-3">
               <img src="css/img/h.jpg" class="img-fluid rounded-start" style="margin: 1rem">
