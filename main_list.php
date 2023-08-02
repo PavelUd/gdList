@@ -1,42 +1,41 @@
 <?php
 Class MainList
 {
-    function get_header()
+    function get_header($nameCard)
     {
-        $result = '<div class="col-md-6" style="margin-left: 1.5rem"><div id="TreeCard">';
-        for ($i = 0;$i < 10; $i++)
-        {
-            $result .= '<a href="?page=LegacyList" class="card" style="max-width: 540px; margin-left: 1.5rem; margin-top: 1.5rem; text-decoration: none; color: black " name="diamond" ><div class = "mini-card" data-aos="fade-down">
-          <div class="row g-0">
-            <div class="col-md-3">
-              <img src="css/img/h.jpg" class="img-fluid rounded-start" style="margin: 1rem">
-            </div>
-    <div class="col-md-4">
-      <div class="card-body">
-        <h5 class="card-title">Заголовок карточки</h5>
-        <p class="card-text">fgf</p>
-      </div>
-    </div>
-  </div>
-</div>
-</a>';
+        $params = array(
+          "type" => $nameCard
+        );
+        $sqlHelper= new \gdlist\www\Db();
+        $result = '<div class="col-md-12"  style="justify-content: center; display: flex; margin-top: 1rem"><div id="TreeCard">';
+        if (isset($nameCard)) {
+            $cards = $sqlHelper->get_rows('select * from levels where type = :type', $params);
         }
-        $result .= '<a href="?page=LegacyList" class="card" style="max-width: 540px; margin-left: 1.5rem; margin-top: 1.5rem; text-decoration: none; color: black " name="gold" ><div class = "mini-card">
-          <div class="row g-0">
-            <div class="col-md-3">
-              <img src="css/img/h.jpg" class="img-fluid rounded-start" style="margin: 1rem">
+        else {
+            $cards = $sqlHelper->get_rows("select * from levels");
+        }
+        $i=0;
+                foreach ($cards as $card) {
+                    extract($card);
+                    $i++;
+                    $result .= '<div class="aos" data-aos="fade-down"><a href="?page=card&id='.$id.'" class="card" style="  min-width: 740px ; margin-left: 1.5rem; margin-top: 1.5rem; text-decoration: none; color: black;" name="'.$type.'" ><div class = "mini-card">
+                  <div class="row g-0">
+                    <span style="max-width: 170px; margin-left: 1rem;">
+                      <img src="http://img.youtube.com/vi/'.$link.'/mqdefault.jpg" class="img-fluid rounded-start" style="margin: 0.5rem">
+                    </span>
+            <div style="margin-left: 1rem">
+              <div class="card-body"><h3 class="card-text" style="font-weight: bold">
+                '.$name.' - #'.$i.'</h3>
+                <h4 class="card-title">'.$Account.'</h4>
+              </div>
             </div>
-    <div class="col-md-4">
-      <div class="card-body">
-        <h5 class="card-title">Заголовок</h5>
-        <p class="card-text">fgf</p>
-      </div>
-    </div>
-  </div>
-</div>
-</a>';
-        $result .= '</div></div>';
-        return $result;
+          </div>
+        </div>
+        </a>
+                </div>';
+                }   
+                    $result .= '</div></div>';
+                return $result;
     }
 }
 ?>
