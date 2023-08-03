@@ -1,14 +1,14 @@
 <?php
+namespace gdlist\www;
 class Card
 {
     private $id;
     private $info;
     private $records;
     private $fps;
-    public function __construct()
+    public function construct($id)
     {
-        $db = new \gdlist\www\Db();
-        $this->id = $_REQUEST["id"];
+        $db = new Db();
         $params = array(
             'id' => $this->id
         );
@@ -19,8 +19,10 @@ class Card
         $this->info = $db->get_row("select * from levels where id = :id", $params);
         $this->fps =  $this->info["FPS"] ?  $this->info["FPS"] : "Any";
     }
-    function get_media()
+    function get_media($id)
     {
+        $this->id = $id;
+        $this->construct($id);
         extract($this->info);
         $points = $this->get_level_points();
         $result = '<div style="margin-top: 1rem; margin-left: 1rem; text-align: center"><h2 style="font-weight: bold;">'.$name.'</h2>';

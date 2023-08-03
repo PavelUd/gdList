@@ -1,8 +1,9 @@
 <?php
 Class Frame
 {
-    function get_header($page)
+    function get_header($path)
     {
+        $page = explode('/', trim($path, '/'));
         $array = array(
             "MainList" => "Main List",
             "LegacyList" => "Legacy List",
@@ -12,10 +13,10 @@ Class Frame
   <nav class="container d-flex flex-column flex-md-row justify-content-between" style="font-size: large; margin-top: 1rem">
     <div class="btn-group col-8 mx-auto" role="group" aria-label="Basic outlined example">';
         foreach ($array as $key => $value) {
-            if ($key == $page["page"]) {
-                $result .= ' <a type="button" class="btn btn-outline-primary active" href="?page=' . $key . '"><b>' . $value . '</b></a>';
+            if ($key == $page[0]) {
+                $result .= ' <a type="button" class="btn btn-outline-primary active" href="/' . $key . '"><b>' . $value . '</b></a>';
             } else {
-                $result .= '<a type="button" class="btn btn-outline-primary" href="?page=' . $key . '"><b>' . $value . '</b></a>';
+                $result .= '<a type="button" class="btn btn-outline-primary" href="/' . $key . '"><b>' . $value . '</b></a>';
             }
         }
         $types = array(
@@ -45,15 +46,15 @@ Class Frame
     <button style="text-decoration: none; font-family: Georgia" class="btn btn-outline-primary" data-target="#addSingModal" data-toggle="modal"><b>Sign up</b></button>
     </nav>';
       $result .= ' <nav class="container d-flex flex-column flex-md-row justify-content-between" style="font-size: large; margin-top: 1rem"><div class="btn-group col-12 mx-auto" role="group"  id="header" onclick="get_info(event)">';
-      $page["page"] = (isset($array[$page["page"]])) ? $page["page"] : 'MainList';
+      $page[0] = (isset($array[$page[0]])) ? $page[0] : 'MainList';
       foreach ($types as $type => $typeArray)
       {
-          if (isset($page["type"]) && $page["type"] == $type)
+          if (isset($page[1]) && $page[1] == $type)
           {
-              $result .= '<a type="button" class="'.$typeArray["type"].' active" name = "gold" href="?page='.$page["page"].'&type='.$type.'" style="font-weight: bold">'.$typeArray["name"].'</a>';
+              $result .= '<a type="button" class="'.$typeArray["type"].' active" href="/'.$page[0].'/'.$type.'" style="font-weight: bold">'.$typeArray["name"].'</a>';
           }
           else {
-              $result .= '<a type="button" class="' . $typeArray["type"] . '" name = "gold" href="?page=' . $page["page"] . '&type=' . $type . '" style="font-weight: bold">' . $typeArray["name"] . '</a>';
+              $result .= '<a type="button" class="' . $typeArray["type"] . '" href="/'.$page[0].'/'.$type.'" style="font-weight: bold">' . $typeArray["name"] . '</a>';
           }
       }
 $result .= '</div></nav>';
