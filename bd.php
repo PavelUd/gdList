@@ -10,7 +10,7 @@ class Db
         $base = "gd_list";
         $username = "root";
         $password = "";
-        $this->db = new PDO('mysql:host='.$servername.';dbname='.$base.'', $username, $password);
+        $this->db = new PDO('mysql:host='.$servername.';dbname='.$base, $username, $password);
     }
 
     public function query($sqlQuery, $params = []) {

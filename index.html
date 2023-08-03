@@ -2,55 +2,25 @@
 <html lang="ru">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="node_modules/aos/dist/aos.css">
+    <link rel="stylesheet" href="/node_modules/aos/dist/aos.css">
     <link rel="stylesheet" href="/css/bootstrap2020v1.css">
-    <link type="text/css" rel="stylesheet" href="node_modules/video.js/dist/video-js.min.css" />
+    <link type="text/css" rel="stylesheet" href="/node_modules/video.js/dist/video-js.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link
-            href="https://unpkg.com/@videojs/themes@1/dist/fantasy/index.css"
-            rel="stylesheet"
-    />
+    <link href="https://unpkg.com/@videojs/themes@1/dist/fantasy/index.css" rel="stylesheet">
     <title>Лист Для полного разрыва</title>
 </head>
 <body>
-<meta charset="utf-8">
-<script src="node_modules/aos/dist/aos.js"></script>
+<!-- Ваш контент здесь -->
+
+<script src="/node_modules/aos/dist/aos.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-<script src="node_modules/video.js/dist/video.min.js"></script>
-<script src="node_modules/videojs-youtube/dist/Youtube.min.js"></script>
-<script src="node_modules/videojs-youtube/dist/Youtube.js"></script>
-<script type="text/javascript" src="node_modules/video.js/dist/video.min.js"></script>
-<script type="text/javascript" src="node_modules/"></script>
+<script src="/node_modules/video.js/dist/video.min.js"></script>
+<script src="/node_modules/videojs-youtube/dist/Youtube.min.js"></script>
 <script>
     AOS.init();
-</script>
-<script>
-    var globalbutton;
-    var globalclass;
-    function get_info(event)
-    {
-        if (globalbutton) {
-            globalbutton.setAttribute('class', globalclass)
-        }
-        var button = event.target;
-        var _class = button.getAttribute('class')
-        globalclass = _class
-        button.setAttribute('class', _class+ ' active')
-        if (button.tagName === 'A') {
-            var buttonName = button.name;
-        }
-        globalbutton = button
-        console.log(button)
-
-    }
-    function sing_in(event)
-    {
-        var buttom = event.target
-        return document.getElementById("sing_form")
-    }
 </script>
 </body>
 </html>
