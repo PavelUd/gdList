@@ -116,10 +116,5 @@ $result .= '</div></nav>';
     </div>';
         return $table;
     }
-    function login_exit()
-    {
-        unset($_SESSION['name']);
-        header("Location: /MainList");
-    }
 }
 ?>
