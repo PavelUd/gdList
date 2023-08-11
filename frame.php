@@ -1,8 +1,16 @@
 <?php
+namespace gdlist\www;
 Class Frame
 {
     function get_header($path)
     {
+        if (isset($_SESSION["name"])){
+            $reg = $this->get_member_form();
+        }
+        else
+        {
+            $reg = ' <button style="text-decoration: none; font-family: Georgia" class="btn btn-outline-primary" data-target="#addSingModal" data-toggle="modal"><b>Sign up</b></button>';
+        }
         $page = explode('/', trim($path, '/'));
         $array = array(
             "MainList" => "Main List",
@@ -43,9 +51,9 @@ Class Frame
         );
       $result .= '
     </div>
-    <button style="text-decoration: none; font-family: Georgia" class="btn btn-outline-primary" data-target="#addSingModal" data-toggle="modal"><b>Sign up</b></button>
+   '.$reg.'
     </nav>';
-      $result .= ' <nav class="container d-flex flex-column flex-md-row justify-content-between" style="font-size: large; margin-top: 1rem"><div class="btn-group col-12 mx-auto" role="group"  id="header" onclick="get_info(event)">';
+      $result .= ' <nav class="container d-flex flex-column flex-md-row justify-content-between" style="font-size: large; margin-top: 1rem"><div class="btn-group col-12 mx-auto" role="group"  id="header">';
       $page[0] = (isset($array[$page[0]])) ? $page[0] : 'MainList';
       foreach ($types as $type => $typeArray)
       {
@@ -68,20 +76,45 @@ $result .= '</div></nav>';
         </button>
       </div>
       <div class="modal-body">
-        <form action="sing.php" method="post">
+        <form action="/login.php" method="post">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Имя Пользователя" name="nameGroup" required>
+            <input type="text" class="form-control" placeholder="Имя Пользователя" name="name" required>
           </div>
           <div class="form-group">
-            <input type="password" class="form-control" placeholder="Пароль" name="nameGroup" required>
+            <input type="password" class="form-control" placeholder="Пароль" name="password" required>
           </div>
-          <button style="text-decoration: none; font-family: Georgia" class="btn btn-outline-dark"><b>Sign up</b></button>
+          <button type ="submit" style="text-decoration: none; font-family: Georgia" class="btn btn-outline-dark"><b>Sign up</b></button>
         </form>
       </div>
     </div>
   </div>
 </div>';
         return $result;
+    }
+    private function get_member_form(){
+        $table = '<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Переключить навигацию">
+      <span style="font-weight: bold">'.$_SESSION["name"].'</span>
+    </button>
+    <div class="offcanvas offcanvas-end text-bg-light" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h3 class="offcanvas-title" id="offcanvasNavbarLabel">Сервис</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Закрыть"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" style="text-decoration: none; margin-top: 0.5rem" href="/add_record">Добавить Рекорд</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="text-decoration: none; margin-top: 0.5rem" href="/create_level">Добавить Уровень</a>
+          </li> 
+          <li class="nav-item">
+            <a  class="btn btn-outline-danger" style="text-decoration: none; margin-top: 2rem" href="/exit">Выйти</a>
+          </li> 
+        </ul>
+      </div>
+    </div>';
+        return $table;
     }
 }
 ?>
