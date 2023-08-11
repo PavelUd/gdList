@@ -103,10 +103,10 @@ $result .= '</div></nav>';
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" style="text-decoration: none; margin-top: 0.5rem" href="#">Добавить Рекорд</a>
+            <a class="nav-link" aria-current="page" style="text-decoration: none; margin-top: 0.5rem" href="/add_record">Добавить Рекорд</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="text-decoration: none; margin-top: 0.5rem" href="#">Добавить Уровень</a>
+            <a class="nav-link" style="text-decoration: none; margin-top: 0.5rem" href="/create_level">Добавить Уровень</a>
           </li> 
           <li class="nav-item">
             <a  class="btn btn-outline-danger" style="text-decoration: none; margin-top: 2rem" href="/exit">Выйти</a>

@@ -4,6 +4,7 @@ include 'bd.php';
 require 'main_list.php';
 require_once 'frame.php';
 require_once 'card.php';
+require_once 'lk_service.php';
 require_once dirname(__FILE__) . '/back/Router.php';
 use gdlist\www\back\Router;
 use gdlist\www\Frame;
