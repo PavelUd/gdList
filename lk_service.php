@@ -1,11 +1,9 @@
 <?php
 namespace gdlist\www;
-Class Service
+use gdlist\www\back\Controller;
+require_once dirname(__FILE__) . '/back/Controller.php';
+Class Service extends Controller
 {
-    function __construct()
-    {
-        $this->check();
-    }
     public function get_record()
     {
         return "hghghghghg";
@@ -13,12 +11,6 @@ Class Service
     public function create_level()
     {
         return "hjhjhjh";
-    }
-    private function check()
-    {
-        if (!isset($_SESSION["name"])) {
-            header("Location: /MainList");
-        }
     }
 }
 ?>

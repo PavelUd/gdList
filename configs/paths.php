@@ -22,7 +22,7 @@ $paths = [''=>['controller' => 'index',
     'action' => 'get_main_list',
     ],
     'exit' =>[
-        'controller' => 'frame',
+        'controller' => 'view',
         'action' => 'login_exit',
     ],
     'add_record' =>[

@@ -1,6 +1,8 @@
 <?php
 namespace gdlist\www\back;
 require_once 'back\IRouter.php';
+use gdlist\www\View;
+
 class Router implements \IRouter
 {
     protected $paths = [];
@@ -49,8 +51,11 @@ class Router implements \IRouter
                        return $class->$method();
                    }
                }
+               View::errorCode(404);
            }
+            View::errorCode(404);
         }
+        View::errorCode(404);
     }
 }
 ?>
