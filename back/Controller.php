@@ -2,22 +2,16 @@
 
 namespace gdlist\www\back;
 
-class Controller{
-    public function login_exit()
+abstract class Controller
+{
+    function __construct()
     {
-        unset($_SESSION['name']);
-        header("Location: /MainList");
+        $this->check();
     }
-    public function redirect($url)
+    private function check()
     {
-        header('location:'.$url);
-        exit;
-    }
-    public static function errorCode($code)
-    {
-        http_response_code($code);
-        if ($code == 404) {
-            header("HTTP/1.0 404 Not Found");
+        if (!isset($_SESSION["name"])) {
+            header("Location: /MainList");
         }
     }
 }
