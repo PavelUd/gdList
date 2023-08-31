@@ -6,6 +6,7 @@ require_once 'frame.php';
 require_once 'card.php';
 require_once 'lk_service.php';
 require_once 'View.php';
+require_once 'nav_Modals.php';
 require_once dirname(__FILE__) . '/back/Router.php';
 use gdlist\www\back\Router;
 use gdlist\www\Frame;

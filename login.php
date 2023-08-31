@@ -7,11 +7,12 @@ if (preg_match('/^[а-яА-Яa-zA-Z0-9]+$/u', $_POST["name"]) && strip_tags($_PO
     $params = [
         'name' => $name
     ];
-    $password = $db->get_row("select password from members where name = :name", $params)["password"];
-    if ($password && $password == $_POST["password"]) {
+    $user = $db->get_row("select password, id from members where name = :name", $params);
+    if ($user["password"] && $user["password"] == $_POST["password"]) {
         if (session_start()) {
             unset($_SESSION['name']);
             $_SESSION['name'] = $_POST['name'];
+            $_SESSION['id'] = $user['id'];
 
 
             if (isset($_SESSION['name'])) {
