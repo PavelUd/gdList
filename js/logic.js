@@ -44,3 +44,11 @@ document.addEventListener("DOMContentLoaded", function () {
  });
      input.addEventListener("input", updateAutocompleteList);
  });
+function create_level()
+{
+    var name = document.getElementById("create_level").value;
+    var video = document.getElementById("create_videoInput").value;
+    var fps = document.getElementById("create_fps").value;
+    var type = document.getElementById("create_type").value;
+    console.log(name, video, fps, type)
+}

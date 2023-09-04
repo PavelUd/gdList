@@ -7,7 +7,6 @@ Class Service extends Controller
     public function get_record()
     {
         $idPlayer = $_SESSION["id"];
-
         $level = $_POST['level'];
         $proof = $_POST['proof'];
         $percent = $_POST['percent'];
@@ -44,7 +43,7 @@ Class Service extends Controller
 
     public function create_level()
     {
-        return "hjhjhjh";
+        var_dump($_POST);
     }
 }
 ?>
