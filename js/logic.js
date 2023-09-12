@@ -44,11 +44,40 @@ document.addEventListener("DOMContentLoaded", function () {
  });
      input.addEventListener("input", updateAutocompleteList);
  });
+function add_record()
+{
+    var name = document.getElementById("autocompleteInput").value;
+    var precent = document.getElementById("percentInput").value;
+    var video = document.getElementById("videoInput").value;
+    console.log(video, precent, name)
+    var params = {precent, video, name}
+    $.ajax({
+        type: "POST",
+        url: "/add_record",
+        data: params
+    }).done(function (msg) {
+        console.log(msg);
+    })
+        .fail(function (jqXHR, textStatus, errorThrown) {
+            console.error('Ошибка: ' + textStatus, errorThrown);
+        });
+}
 function create_level()
 {
     var name = document.getElementById("create_level").value;
     var video = document.getElementById("create_videoInput").value;
     var fps = document.getElementById("create_fps").value;
     var type = document.getElementById("create_type").value;
-    console.log(name, video, fps, type)
+    var params = {type, video, fps, name}
+    $.ajax({
+        type: "POST",
+        url: "/create_level",
+        data: params
+    }).done(function (msg) {
+        location.reload();
+        console.log(msg)
+})
+        .fail(function (jqXHR, textStatus, errorThrown) {
+            console.error('Ошибка: ' + textStatus, errorThrown);
+        });
 }

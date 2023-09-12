@@ -19,7 +19,7 @@ $twig = new \Twig\Environment($loader, [
 ]);
 Class Frame
 {
-    function get_header($path)
+    function get_header($path) : string
     {
         global $twig;
         $types = array(
@@ -88,7 +88,7 @@ $result .= '</div></nav>';
 
         return $result;
     }
-    private function get_member_form($types){
+    private function get_member_form($types): string{
         global $twig;
         $table = '<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Переключить навигацию">
       <span style="font-weight: bold">'.$_SESSION["name"].'</span>

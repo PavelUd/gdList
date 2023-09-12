@@ -15,7 +15,7 @@ if (preg_match('/^[а-яА-Яa-zA-Z0-9]+$/u', $_POST["name"]) && strip_tags($_PO
             $_SESSION['id'] = $user['id'];
             if (isset($_SESSION['name'])) {
                 header("Location: /MainList");
-            } else {
+            }  else {
                 echo "Что-то пошло не так. Попробуйте позже.";
             }
         }
