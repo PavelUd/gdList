@@ -44,7 +44,7 @@ Class Frame
             "rock" => array("name" => "Rock",
                 "type" => "btn btn-outline-rock"),
         );
-        if (isset($_SESSION["name"])){
+        if (isset($_SESSION["user"])){
             $reg = $this->get_member_form($types);
         }
         else
@@ -89,9 +89,12 @@ $result .= '</div></nav>';
         return $result;
     }
     private function get_member_form($types): string{
+
         global $twig;
+        $user = $_SESSION['user'];
+        $name = $user->getName();
         $table = '<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Переключить навигацию">
-      <span style="font-weight: bold">'.$_SESSION["name"].'</span>
+      <span style="font-weight: bold">'.$name.'</span>
     </button>
     ';
         $sql = new Db();
@@ -104,7 +107,7 @@ $result .= '</div></nav>';
             {
                 $s[$name] = $type["name"];
             }
-        $table.= $twig->render('create.html', ['name' => $_SESSION["name"], 'types' => $s]);
+        $table.= $twig->render('create.html', ['name' => $name, 'types' => $s]);
         return $table;
     }
 }
