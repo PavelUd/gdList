@@ -1,11 +1,51 @@
 <?php
 namespace gdlist\www;
+spl_autoload_register(function ($classname) {
+    $dirs = array (
+        './Twig-2.x/'
+    );
+
+    foreach ($dirs as $dir) {
+        $filename = $dir . str_replace('\\', '/', $classname) .'.php';
+        if (file_exists($filename)) {
+            require_once $filename;
+            break;
+        }
+    }
+});
+$loader = new \Twig\Loader\FilesystemLoader('templates');
+$twig = new \Twig\Environment($loader, [
+    'cache' => 'cache',
+]);
 Class Frame
 {
-    function get_header($path)
+    function get_header($path) : string
     {
+        global $twig;
+        $types = array(
+            "exodium" => array("name" => "Exodium",
+                "type" => "btn btn-outline-dark"),
+            "legend" => array("name" => "Legend",
+                "type" => "btn btn-outline-secondary"),
+            "amethyst" => array("name" => "Amethyst",
+                "type" => "btn btn-outline-amethyst"),
+            "diamond" => array("name" => "Diamond",
+                "type" => "btn btn-outline-diamond"),
+            "ruby" => array("name" => "Ruby",
+                "type" => "btn btn-outline-ruby"),
+            "emerald" => array("name" => "Emerald",
+                "type" => "btn btn-outline-emerald"),
+            "gold" => array("name" => "Gold",
+                "type" => "btn btn-outline-gold"),
+            "silver" => array("name" => "Silver",
+                "type" => "btn btn-outline-silver"),
+            "bronze" => array("name" => "Bronze",
+                "type" => "btn btn-outline-bronze"),
+            "rock" => array("name" => "Rock",
+                "type" => "btn btn-outline-rock"),
+        );
         if (isset($_SESSION["name"])){
-            $reg = $this->get_member_form();
+            $reg = $this->get_member_form($types);
         }
         else
         {
@@ -27,28 +67,7 @@ Class Frame
                 $result .= '<a type="button" class="btn btn-outline-primary" href="/' . $key . '"><b>' . $value . '</b></a>';
             }
         }
-        $types = array(
-            "exodium" => array("name" => "Exodium",
-                            "type" => "btn btn-outline-dark"),
-            "legend" => array("name" => "Legend",
-                            "type" => "btn btn-outline-secondary"),
-            "amethyst" => array("name" => "Amethyst",
-                            "type" => "btn btn-outline-amethyst"),
-            "diamond" => array("name" => "Diamond",
-                            "type" => "btn btn-outline-diamond"),
-            "ruby" => array("name" => "Ruby",
-                            "type" => "btn btn-outline-ruby"),
-            "emerald" => array("name" => "Emerald",
-                            "type" => "btn btn-outline-emerald"),
-            "gold" => array("name" => "Gold",
-                            "type" => "btn btn-outline-gold"),
-            "silver" => array("name" => "Silver",
-                            "type" => "btn btn-outline-silver"),
-            "bronze" => array("name" => "Bronze",
-                            "type" => "btn btn-outline-bronze"),
-            "rock" => array("name" => "Rock",
-                            "type" => "btn btn-outline-rock"),
-        );
+       $result.= $twig->render('login_modal.html');
       $result .= '
     </div>
    '.$reg.'
@@ -66,54 +85,26 @@ Class Frame
           }
       }
 $result .= '</div></nav>';
-        $result .= '<div class="modal fade" id="addSingModal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Войти</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="/login.php" method="post">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Имя Пользователя" name="name" required>
-          </div>
-          <div class="form-group">
-            <input type="password" class="form-control" placeholder="Пароль" name="password" required>
-          </div>
-          <button type ="submit" style="text-decoration: none; font-family: Georgia" class="btn btn-outline-dark"><b>Sign up</b></button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>';
+
         return $result;
     }
-    private function get_member_form(){
+    private function get_member_form($types): string{
+        global $twig;
         $table = '<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Переключить навигацию">
       <span style="font-weight: bold">'.$_SESSION["name"].'</span>
     </button>
-    <div class="offcanvas offcanvas-end text-bg-light" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-      <div class="offcanvas-header">
-        <h3 class="offcanvas-title" id="offcanvasNavbarLabel">Сервис</h3>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Закрыть"></button>
-      </div>
-      <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" style="text-decoration: none; margin-top: 0.5rem" href="/add_record">Добавить Рекорд</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" style="text-decoration: none; margin-top: 0.5rem" href="/create_level">Добавить Уровень</a>
-          </li> 
-          <li class="nav-item">
-            <a  class="btn btn-outline-danger" style="text-decoration: none; margin-top: 2rem" href="/exit">Выйти</a>
-          </li> 
-        </ul>
-      </div>
-    </div>';
+    ';
+        $sql = new Db();
+        $levels = $sql->get_rows("select id, name from levels");
+        $json_levels = json_encode($levels,JSON_UNESCAPED_UNICODE);
+        $json_levels = (str_replace(' ', '_',$json_levels));
+       $table .= $twig->render('naw.html');
+        $table .= $twig->render('add_record.html', ['levels' => $json_levels]);
+            foreach ($types as $name => $type)
+            {
+                $s[$name] = $type["name"];
+            }
+        $table.= $twig->render('create.html', ['name' => $_SESSION["name"], 'types' => $s]);
         return $table;
     }
 }

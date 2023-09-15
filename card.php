@@ -57,6 +57,7 @@ class Card
                     <thead>
                     <tr>
                         <th scope="col">Record Holder</th>
+                        <th scope="col">Progress</th>
                         <th scope="col">Video Proof</th>
                    </tr>
                     </thead>
@@ -65,7 +66,8 @@ class Card
         for ($i = 0; $i < count($this->records);$i++)
         {
             $link = $this->records[$i]["video_proof"] ? '<a href="'.$this->records[$i]["video_proof"].'">':"";
-            $table .= '<td>'.$this->records[$i]["name"].'</td>
+            $table .= '<td>'.$this->records[$i]["name"].'</td>';
+            $table .= '<td>'.$this->records[$i]["progress"].'%</td>
                     <td>'.$link.'video</a></td>
                     </tr>';
                     }
