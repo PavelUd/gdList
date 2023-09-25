@@ -68,10 +68,11 @@ function create_level()
     var video = document.getElementById("create_videoInput").value;
     var fps = document.getElementById("create_fps").value;
     var type = document.getElementById("create_type").value;
+//    var typeVerify = document.getElementById("typeVerify").value;
     var params = {type, video, fps, name}
-    $.ajax({
+/*    $.ajax({
         type: "POST",
-        url: "/create_level",
+        url: "/verify",
         data: params
     }).done(function (msg) {
         location.reload();
@@ -80,4 +81,4 @@ function create_level()
         .fail(function (jqXHR, textStatus, errorThrown) {
             console.error('Ошибка: ' + textStatus, errorThrown);
         });
-}
+*/}
