@@ -11,7 +11,7 @@ if (preg_match('/^[а-яА-Яa-zA-Z0-9]+$/u', $_POST["name"]) && strip_tags($_PO
     if ($user["password"] && $user["password"] == $_POST["password"]) {
         if (session_start()) {
             unset($_SESSION['name']);
-            $_SESSION['name'] = $_POST['name'];
+            $_SESSION['name'] = $_POST["name"];
             $_SESSION['id'] = $user['id'];
             if (isset($_SESSION['name'])) {
                 header("Location: /MainList");

@@ -11,7 +11,7 @@ abstract class Controller
     }
     private function check() : void
     {
-        if (!isset($_SESSION["name"])) {
+        if (!isset($_SESSION["user"])) {
             header("Location: /MainList");
         }
     }

@@ -28,12 +28,16 @@ $paths = [''=>['controller' => 'index',
     'add_record' =>[
         'controller' => 'service',
         'action' => 'get_record',
-],
+    ],
+    'verify' =>[
+        'controller' => 'service',
+        'action' => 'verify'
+    ],
     'create_level' =>[
         'controller' => 'service',
-        'action' => 'create_level',
-]
-    ];
+        'action' => 'create_level'
+    ]
+];
 foreach ($types as $type) {
     $key = 'MainList/'.$type;
     $paths[$key]=  [

@@ -6,7 +6,6 @@
     "videojs-youtube": "^3.0.1"
   },
   "devDependencies": {
-    "video.js": "^8.3.0",
-    "webpack-cli": "^5.1.4"
+    "video.js": "^8.5.2"
   }
 }
