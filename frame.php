@@ -1,7 +1,5 @@
 <?php
 namespace gdlist\www;
-use \gdlist\www\back\User;
-require_once dirname(__FILE__) . '/back/User.php';
 spl_autoload_register(function ($classname) {
     $dirs = array (
         './Twig-2.x/'
@@ -10,7 +8,7 @@ spl_autoload_register(function ($classname) {
     foreach ($dirs as $dir) {
         $filename = $dir . str_replace('\\', '/', $classname) .'.php';
         if (file_exists($filename)) {
-            require $filename;
+            require_once $filename;
             break;
         }
     }
@@ -21,6 +19,7 @@ Class Frame
 {
     function get_header($path) : string
     {
+        global $user;
         global $twig;
         $types = array(
             "exodium" => array("name" => "Exodium",
@@ -44,12 +43,14 @@ Class Frame
             "rock" => array("name" => "Rock",
                 "type" => "btn btn-outline-rock"),
         );
-        if ($_SESSION["status"] == 'ok'){
+        if (isset($_SESSION["id"])){
+            $user = User::getInstance($_SESSION['id']);
+
             $reg = $this->get_member_form($types);
         }
         else
         {
-            $reg = ' <button style="text-decoration: none; font-family: Georgia;border-radius: 5px;" class="btn btn-outline-primary active" data-target="#addSingModal" data-toggle="modal"><b>Sign up</b></button>';
+            $reg = ' <button style="text-decoration: none; font-family: Georgia" class="btn btn-outline-primary" data-target="#addSingModal" data-toggle="modal"><b>Sign up</b></button>';
         }
         $page = explode('/', trim($path, '/'));
         $array = array(
@@ -89,14 +90,9 @@ $result .= '</div></nav>';
         return $result;
     }
     private function get_member_form($types): string{
-
         global $twig;
-        $user = User::getInstance();
-        var_dump($user);
-        $userName = $user->getName();
-
         $table = '<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Переключить навигацию">
-      <span style="font-weight: bold">'.$userName.'</span>
+      <span style="font-weight: bold">'.$_SESSION["name"].'</span>
     </button>
     ';
         $sql = new Db();
@@ -109,34 +105,7 @@ $result .= '</div></nav>';
             {
                 $s[$name] = $type["name"];
             }
-            $cards = $sql->get_rows("select * from `verification` where typeVerify = 'Confirmation'");
-        $table.= $twig->render('create.html', ['name' => $userName, 'types' => $s]);
-            $table .= '<div class = "modal fade" tabindex="-1" id="verify">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Верификация</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>';
-            foreach ($cards as $card) {
-                $info = json_decode($card["info"]);
-                $id = $card["id"];
-                $table .= '<div class="modal-body">
-                <div class="card"><form action="/verify" method="post">
-                    <div class="card-title" style="text-align: center"><label>'.$info->level.'</label></div>
-                    <div class="card-body">
-                        <span>'.$info->typeVerify.'</span>
-                       <input type = hidden name = "id" value="'.$id.'">
-                    </div>
-                    <div style="margin: 1rem" class="d-flex justify-content-between">
-                    <button type="submit" class="btn btn-outline-success">Добавить</button>
-                    <button type="button" class="btn btn-outline-danger">Отклонить</button>
-                    </div></form>
-                </div>
-            </div>';
-            }
+        $table.= $twig->render('create.html', ['name' => $_SESSION["name"], 'types' => $s]);
         return $table;
     }
 }

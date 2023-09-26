@@ -1,23 +1,23 @@
 <?php
 namespace gdlist\www;
 use gdlist\www\back\Controller;
+use gdlist\www\back\User;
 require_once dirname(__FILE__) . '/back/Controller.php';
 Class Service extends Controller
 {
-    use Verification_Service;
-    public function get_record(): void
+    public function get_record() : void
     {
         extract($_POST);
-        $user = $_SESSION["user"];
+
+        $user = User::getInstance();
         $idPlayer = $user->getId();
         $sqlHelper = new Db();
-        $param = ['level' => $level];
+
+        $param = [
+            'level' => $level,
+        ];
         $levelData = $sqlHelper->get_row("SELECT id FROM levels WHERE name = :level", $param)["id"];
 
-        if (!$levelData =! "f") {
-            header("Location: /MainList");
-            return;
-        }
         $pr_param = [
             'id' => $levelData,
             'idPlayer' => $idPlayer
@@ -27,7 +27,6 @@ Class Service extends Controller
             $_POST["typeVerify"] = "add_record";
             $_POST["idPlayer"] = $idPlayer;
             $this->verification_log($_POST);
-            var_dump($_POST);
         } elseif ($existingRecord && $existingRecord["progress"] <= $percent && $this->YouTubeLink($proof)) {
             $_POST["typeVerify"] = "update_record";
             $_POST["idPlayer"] = $idPlayer;
@@ -36,11 +35,11 @@ Class Service extends Controller
             header("Location: /MainList");
         }
     }
-//https://youtu.be/rnXj9bWfodM?si=mAmPivCFpTF-p_Tv
-    public function create_level ()
+
+    public function create_level()
     {
         $sqlHelper = new Db();
-        extract($_POST);
+       extract($_POST);
         $link = $this->YouTubeLink($video);
         $islevel = $sqlHelper->get_rows("select * from levels where name = '$level' or link = '$link'");
         if (!$islevel && $link) {
@@ -89,7 +88,7 @@ trait Verification_Service
     public function verification_log($info) : void{
         $sqlHelper = new Db();
         $datetime = date('Y-m-d H:i:s');
-        $user = $_SESSION["user"]->getName();
+        $user = User::getInstance()->getName();
         $params = json_encode($info, JSON_UNESCAPED_UNICODE);
         $sqlHelper->query("INSERT INTO `verification`(`typeVerify`, `sender`, `info`, `dateTime`) VALUES ('Confirmation','$user','$params','$datetime')");
         header("Location: /MainList");

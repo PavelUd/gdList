@@ -1,5 +1,6 @@
 <?php
 namespace gdlist\www\back;
+use gdlist\www\Db;
 class User
 {
     private string $name;
@@ -7,18 +8,19 @@ class User
     private static $_instance = null;
     private array $created_levels;
     private array $records;
-    private function __construct($name, $id)
+    private function __construct($id)
     {
-        $this->name = $name;
+        $db = new Db();
+        $this->name = $db->get_column("select name from members where id = $id");
         $this->id = $id;
     }
     private function __clone() {
     }
-    static public function getInstance($name = null, $id = null) {
+    static public function getInstance($id = null) {
         //все происходит через этот метод
         if(is_null(self::$_instance))
         {
-            self::$_instance = new self($name, $id);
+            self::$_instance = new self($id);
         }
         return self::$_instance;
     }

@@ -1,11 +1,13 @@
 <?php
 
 namespace gdlist\www;
+
 class View
 {
     public function login_exit()
     {
-        unset($_SESSION['user']);
+
+        unset($_SESSION['id']);
         header("Location: /MainList");
     }
 

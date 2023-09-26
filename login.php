@@ -10,10 +10,10 @@ if (preg_match('/^[а-яА-Яa-zA-Z0-9]+$/u', $_POST["name"]) && strip_tags($_PO
     $user = $db->get_row("select password, id from members where name = :name", $params);
     if ($user["password"] && $user["password"] == $_POST["password"]) {
         if (session_start()) {
-            unset($_SESSION['name']);
-            $_SESSION['name'] = $_POST["name"];
+
+            unset($_SESSION['id']);
             $_SESSION['id'] = $user['id'];
-            if (isset($_SESSION['name'])) {
+            if (isset($_SESSION['id'])) {
                 header("Location: /MainList");
             }  else {
                 echo "Что-то пошло не так. Попробуйте позже.";
