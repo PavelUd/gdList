@@ -7,32 +7,31 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body"><form action="/create_level" method="post">
+            <div class="modal-body"><form>
                 <div class = "col-md-6"><label>Название</label>
                     <div class="form-group">
-                        <input type="text" placeholder="Название" class="form-control" id="create_level" name="level" required>
+                        <input type="text" placeholder="Название" class="form-control" id="create_level" name ="level" required>
                     </div>
                     <div class="form-group">
                         <label for="percentInput">Автор</label>
-                        <input type="text" class="form-control" id="author" name ="author" required value="{{ name }}" readonly>
+                        <input type="text" class="form-control" id="autor" name ="percent" required disabled value="{{ name }}">
                     </div></div><div class ="col-8"><div class="form-group">
                 <div class="justify-content-between" style="display: flex">
                     <span>Тип</span><span>  FPS</span></div></div></div>
-                <div class ="col-md-12"><div class="justify-content-between" style="display: flex"><div class="form-group"><span><select id="create_type" name="type" class="custom-select" style="min-width: 200px">
+                <div class ="col-md-12"><div class="justify-content-between" style="display: flex"><div class="form-group"><span><select id="create_type" class="custom-select" style="min-width: 200px">
             {% for key, value in types %}
         <option value="{{ key }}">{{ value }}</option>
     {% endfor %}
 </select></span></div>
-                    <span><input id="create_fps" name = "fps" class="form-control" type="number"></span>
-                    <input name = "typeVerify" type="hidden" value = "level"></div>
+                    <span><input id="create_fps" class="form-control" type="number"></span></div>
                     <div class="form-group">
                         <label for="proffvideo">Видео</label>
                         <div class="input-group">
-                            <input type="text" name = 'video' class="form-control" id="create_videoInput" placeholder="Введите ссылку на видео-подтверждение">
+                            <input type="text" class="form-control" id="create_videoInput" placeholder="Введите ссылку на видео-подтверждение" name = "proof">
                         </div></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
                 </div></form>
             </div>
         </div></div></div>
